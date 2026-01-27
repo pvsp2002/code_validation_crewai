@@ -101,7 +101,7 @@ Telemetry is disabled to ensure compatibility with Streamlit.
 Start the frontend
 
 ``` powershell
-streamlit run frontend.py
+streamlit run frontend_time.py
 ```
 
 ``` powershell
