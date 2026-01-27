@@ -83,6 +83,7 @@ Install dependencies:
 
 ```powershell
 pip install -r requirements.txt
+```
 
 🔐 Environment Setup
 
@@ -91,6 +92,7 @@ Create a .env file:
 ```.env
 OPENAI_API_KEY=your_api_key_here
 CREWAI_DISABLE_TELEMETRY=true
+```
 
 
 Telemetry is disabled to ensure compatibility with Streamlit.
