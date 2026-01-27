@@ -8,9 +8,10 @@ Identify and fix:
 - Syntax errors
 - Logical errors
 - Bad practices
+- Complexity issues
 
 Return the corrected version of the code.
 """,
-        expected_output="Corrected and improved code.",
+        expected_output="Corrected and improved code with less time complexity.",
         agent=agent
     )

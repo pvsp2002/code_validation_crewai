@@ -16,7 +16,7 @@ st.set_page_config(
 st.title("🧠 CrewAI – Code Validation System")
 
 user_input = st.text_area(
-    "Python Requirement",
+    "Code requirement",
     height=150,
     placeholder="Example: Write a Python program to compute factorial of a number"
 )

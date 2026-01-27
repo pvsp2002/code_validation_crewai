@@ -7,8 +7,8 @@ Write a code based on the following user requirement:
 
 {user_input}
 
-The code should be functional, readable, and well-structured.
+The code should be functional, readable, and well-structured with less time complexity.
 """,
-        expected_output="A complete code solution.",
+        expected_output="A complete code solution with less time complexity.",
         agent=agent
     )
