@@ -83,28 +83,33 @@ Install dependencies:
 
 ```powershell
 pip install -r requirements.txt
+```
 
-🔐 Environment Setup
+## 🔐 Environment Setup
 
 Create a .env file:
 
 ```.env
 OPENAI_API_KEY=your_api_key_here
 CREWAI_DISABLE_TELEMETRY=true
+```
 
 
 Telemetry is disabled to ensure compatibility with Streamlit.
 
-▶️ Running the Application
+## ▶️ Running the Application
 Start the frontend
 
 ``` powershell
 streamlit run frontend.py
+```
 
 ``` powershell
-http://localhost:8501 will be opened
+http://localhost:8501
+will be opened
+```
 
-🖥️ Frontend Output
+## 🖥️ Frontend Output
 
 The UI displays only final validated artifacts:
 
@@ -122,27 +127,26 @@ The UI displays only final validated artifacts:
 
 No agent logs, no telemetry, no internal reasoning.
 
-⏱ Execution Time Measurement
+## ⏱ Execution Time Measurement
 
 The total backend execution time is measured using:
 
 ``` 
 time.perf_counter()
+```
 
 This includes:
 
-All agents
+- All agents
 
-All LLM calls
+- All LLM calls
 
-All test executions
+- All test executions displayed clearly in the frontend.
 
-Displayed clearly in the frontend.
-
-🏁 Final Note
+## 🏁 Final Note
 
 This project demonstrates a production-grade AI pipeline mindset, not a demo toy.
 
-Agents think.
-Tasks validate.
-Frontend only displays truth.
+- Agents think.
+- Tasks validate.
+- Frontend only displays truth.
