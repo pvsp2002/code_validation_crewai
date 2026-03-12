@@ -1,4 +1,4 @@
-from crewai import Crew
+from crewai import Crew, Process
 
 from agents.developer_agent import developer_agent
 from agents.error_handler_agent import error_handler_agent
@@ -13,24 +13,14 @@ from tasks.testing_task import testing_task
 from tasks.review_task import review_task
 
 
-def create_crew(user_input: str) -> Crew:
-    """
-    Creates and returns a CrewAI crew that:
-    1. Develops code of desired language
-    2. Fixes errors
-    3. Generates test scenarios
-    4. Tests the scenarios
-    5. Reviews and validates the result
-    """
+def create_crew(user_input: str):
 
-    # Initialize agents
     dev_agent = developer_agent()
     error_agent = error_handler_agent()
     use_case_agent_instance = use_case_agent()
     test_agent = testing_agent()
     review_agent = reviewer_agent()
 
-    # Define tasks in execution order
     tasks = [
         develop_code_task(dev_agent, user_input),
         error_fix_task(error_agent),
@@ -39,7 +29,6 @@ def create_crew(user_input: str) -> Crew:
         review_task(review_agent)
     ]
 
-    # Create crew
     crew = Crew(
         agents=[
             dev_agent,
@@ -49,6 +38,7 @@ def create_crew(user_input: str) -> Crew:
             review_agent
         ],
         tasks=tasks,
+        process=Process.sequential,
         verbose=True
     )
 

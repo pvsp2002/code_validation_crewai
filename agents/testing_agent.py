@@ -1,9 +1,11 @@
 from crewai import Agent
+from llm_config import get_llm
 
 def testing_agent():
     return Agent(
-        role="Testing Engineer",
-        goal="Execute test scenarios and validate code behavior",
-        backstory="An automation engineer focused on correctness and coverage.",
+        role="Tester",
+        goal="Run tests and validate correctness of the generated code",
+        backstory="Automation testing expert ensuring reliability of software.",
+        llm=get_llm(),
         verbose=True
     )

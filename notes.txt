@@ -1,0 +1,14 @@
+every agent has a role, goal and backstory(flashback)
+and a verbose -- which enables insights
+
+we have 5 agents -- developer, error handler, use case , testing and review
+we have 5 agent tasks -- develop code for developer, 
+error fixer for error handler, 
+genreate use case for use case, 
+testing task fro testing agnet,
+and review task for review agent
+
+your tasks agent actually define the order here..  
+
+
+

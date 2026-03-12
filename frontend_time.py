@@ -1,73 +1,57 @@
-import os
-os.environ["CREWAI_DISABLE_TELEMETRY"] = "true"
-
-import time
 import streamlit as st
-from dotenv import load_dotenv
+import time
 from crew import create_crew
 
-load_dotenv()
-
+# Page configuration
 st.set_page_config(
-    page_title="CrewAI Code Validator",
+    page_title="CrewAI Code Generator",
+    page_icon="🤖",
     layout="wide"
 )
 
-st.title("🧠 CrewAI – Code Validation System")
+st.title("🤖 CrewAI Multi-Agent Code Generator")
+st.write("Enter a coding requirement and let the AI crew generate, test, and review the code.")
 
+# Sidebar
+st.sidebar.header("Settings")
+show_time = st.sidebar.checkbox("Show Execution Time", value=True)
+
+# User Input
 user_input = st.text_area(
-    "Code requirement",
-    height=150,
-    placeholder="Example: Write a Python program to compute factorial of a number"
+    "Enter your coding requirement:",
+    placeholder="Example: Write a Python function to check if a number is prime.",
+    height=150
 )
 
-if st.button("Run Validation 🚀"):
+run_button = st.button("🚀 Run CrewAI")
+
+if run_button:
+
     if not user_input.strip():
         st.warning("Please enter a requirement.")
-    else:
-        # -------------------------
-        # Start timing
-        # -------------------------
-        start_time = time.perf_counter()
+        st.stop()
 
-        with st.spinner("Running backend validation pipeline..."):
-            crew = create_crew(user_input)
+    st.info("Running AI Crew...")
+
+    start_time = time.time()
+
+    try:
+        crew = create_crew(user_input)
+
+        with st.spinner("Agents are working..."):
             result = crew.kickoff()
 
-        # -------------------------
-        # End timing
-        # -------------------------
-        end_time = time.perf_counter()
-        execution_time = end_time - start_time
+        end_time = time.time()
+        total_time = round(end_time - start_time, 2)
 
-        st.success("Validation Completed")
+        st.success("Crew execution completed!")
 
-        # -------------------------
-        # Extract outputs
-        # -------------------------
-        dev_output = result.tasks_output[0].raw
-        corrected_output = result.tasks_output[1].raw
-        test_cases = result.tasks_output[2].raw
-        test_results = result.tasks_output[3].raw
-        final_score = result.raw
+        st.subheader("📄 Final Output")
+        st.code(result, language="python")
 
-        # -------------------------
-        # UI Rendering
-        # -------------------------
-        st.subheader("⏱ Execution Time")
-        st.info(f"Total backend execution time: **{execution_time:.2f} seconds**")
+        if show_time:
+            st.sidebar.success(f"Execution Time: {total_time} seconds")
 
-        st.subheader("🧑‍💻 Generated Code")
-        st.code(dev_output)
-
-        st.subheader("✏️ Corrections & Updated Code")
-        st.markdown(corrected_output)
-
-        st.subheader("🧪 Test Cases")
-        st.markdown(test_cases)
-
-        st.subheader("🧾 Test Execution Results")
-        st.markdown(test_results)
-
-        st.subheader("📊 Final Validation Score")
-        st.markdown(final_score)
+    except Exception as e:
+        st.error("Error occurred during execution.")
+        st.exception(e)

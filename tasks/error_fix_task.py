@@ -1,17 +1,23 @@
 from crewai import Task
 
 def error_fix_task(agent):
+
     return Task(
         description="""
-Review the provided code.
-Identify and fix:
-- Syntax errors
-- Logical errors
-- Bad practices
-- Complexity issues
+        Review the previously generated code.
 
-Return the corrected version of the code.
-""",
-        expected_output="Corrected and improved code with less time complexity.",
+        Identify:
+        - syntax errors
+        - runtime errors
+        - logical bugs
+
+        Fix the code and provide the corrected version.
+        """,
+
+        expected_output="""
+        A corrected version of the Python code with all bugs fixed.
+        Include explanations for the fixes.
+        """,
+
         agent=agent
     )

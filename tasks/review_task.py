@@ -1,19 +1,21 @@
 from crewai import Task
 
 def review_task(agent):
+
     return Task(
         description="""
-Review the test execution results.
-Provide:
-- Validation score (0–100%)
-- Key issues found
-- Final approval decision
-""",
+        Perform a final code review on the tested code.
+
+        Evaluate:
+        - readability
+        - best practices
+        - performance
+        - maintainability
+        """,
+
         expected_output="""
-A review report including:
-- Validation score (%)
-- Issues summary
-- Approved or Not Approved
-""",
+        Final reviewed version of the code with improvement suggestions.
+        """,
+
         agent=agent
     )
